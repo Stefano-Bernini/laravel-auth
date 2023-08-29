@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -14,10 +16,19 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $datas = $request->all();
+
+        if(isset($datas['message'])){
+            $message = $datas['message'];
+        }
+        else{
+            $message = '';
+        }
+
         $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', compact('posts', 'message'));
     }
 
     /**
@@ -99,7 +110,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-
-        return redirect()->route('admin.posts.index');
+        $message = 'Cancellazione post completata';
+        return redirect()->route('admin.posts.index', ['message' => $message]);
     }
 }

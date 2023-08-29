@@ -16,6 +16,11 @@
                 </div>
             </div>
             <div class="col-12 mt-5">
+                @if ($message != '')
+                    <div class="alert alert-success">
+                        {{$message}}
+                    </div>
+                @endif
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -38,10 +43,10 @@
                                     <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-sm btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form class="d-inline-block" action="{{ route('admin.posts.destroy', $post->id)}}" onsubmit="return confirm('Sei sicuro di voler cancellare questo post?')" method="POST">
+                                    <form class="d-inline-block delete-post-form" action="{{ route('admin.posts.destroy', $post->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger" type="submit">
+                                        <button class="btn btn-sm btn-danger" data-post-title="{{$post->title}}" type="submit">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -53,4 +58,5 @@
             </div>
         </div>
     </div>
+    @include('admin.partials.modal_delete')
 @endsection

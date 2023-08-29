@@ -94,7 +94,7 @@
         <main>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                         <!-- Sidebar -->
                         <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
                             <div class="position-sticky">
@@ -106,7 +106,7 @@
                                     </a>
                                     <a href="{{ route('admin.posts.index') }}"
                                         class="list-group-item list-group-item-action py-2 ripple bg-danger fw-bold text-white">
-                                        <i class="fas fa-chart-area fa-fw me-3"></i><span>Project</span>
+                                        <i class="fas fa-chart-area fa-fw me-3"></i><span>Posts</span>
                                     </a>
                                     <a href="#"
                                         class="list-group-item list-group-item-action py-2 ripple bg-danger fw-bold text-white"><i
@@ -115,7 +115,7 @@
                             </div>
                         </nav>
                     </div>
-                    <div class="col-9">
+                    <div class="col-8">
                         @yield('content')
                     </div>
                 </div>
