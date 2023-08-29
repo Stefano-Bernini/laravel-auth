@@ -101,6 +101,15 @@ class PostController extends Controller
     {
         $form_data = $request->all();
 
+        if($request->hasFile('cover_image')){
+            if($post->cover_image){
+                Storage::delete($post->cover_image);
+            }
+
+            $path = Storage::put('post_image', $request->cover_image);
+            $form_data['cover_image'] = $path;
+        }
+
         $form_data['slug'] = $post->generateSlug($form_data['title']);
 
         $post->update($form_data);

@@ -35,6 +35,9 @@
                     <div class="form-group mt-4">
                         <label class="control-label">Immagine di copertina</label>
                         <input type="file" class="form-control @error('cover_image')is_invalid @enderror" name="cover_image" id="cover_image">
+                        @error('cover_image')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mt-4">
                         <label class="control-label">Contenuto</label>
