@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -52,6 +53,12 @@ class PostController extends Controller
         $form_data = $request->all();
 
         $post = new Post();
+
+        if($request->hasFile('cover_image')){
+            $path = Storage::put('post_image', $request->cover_image);
+
+            $form_data['cover_image'] = $path;
+        }
 
         $form_data['slug'] = $post->generateSlug($form_data['title']);
 
